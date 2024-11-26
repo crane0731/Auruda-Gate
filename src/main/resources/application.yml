@@ -1,0 +1,46 @@
+server:
+  port: 8000
+
+#eureka:
+#  client:
+#    allow-redirects: true #default : true
+#    fetch-registry: true #default : true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+jwt:
+  issuer: dlwnsgkr8318@skuniv.ac.kr
+  secret: asfacolkasndlknv3203klfamkld02asdkjfajkvnlancdkdklmasdklv
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+spring:
+  application:
+    name: AurudaGate
+  cloud:
+    gateway:
+      routes:
+        - id: AurudaLogin
+          uri: http://auruda-login:8081
+          predicates:
+            - Path=/aurudalogin/**
+          filters:
+            - StripPrefix=1  # "/aurudalogin"? ???? ???????? ??
+
+        - id: AurudaTrip
+          uri: http://auruda-trip:8082
+          predicates:
+            - Path=/aurudatrip/**
+          filters:
+            - StripPrefix=1  # "/aurudatrip"? ???? ???????? ??
+
+        - id: AurudaArticle
+          uri: http://auruda-article:8083
+          predicates:
+            - Path=/aurudaarticle/**
+          filters:
+            - StripPrefix=1  # "/aurudalogin"? ???? ???????? ??
+
+
