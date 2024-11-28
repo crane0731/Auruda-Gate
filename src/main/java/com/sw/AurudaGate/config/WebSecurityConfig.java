@@ -41,7 +41,7 @@ public class WebSecurityConfig {
                                 "/aurudaarticle/api/auruda/article/me","/aurudaarticle/api/auruda/article/recommendation/{article_id}",
                                 "/aurudaarticle/api/auruda/comment","/aurudaarticle/api/auruda/comment/{comment_id}",
                         "/aurudaarticle/api/auruda/comment/me","/aurudatrip/api/auruda/review","/aurudatrip/api/auruda/review/{review_id}",
-                                "/aurudatrip/api/auruda/storage/**","/aurudatrip/api/auruda/travel").authenticated()
+                                "/aurudatrip/api/auruda/storage/**","/aurudatrip/api/auruda/travel","/aurudaarticle/api/auruda/article/image").authenticated()
 
                         .anyExchange().authenticated()
                 )
