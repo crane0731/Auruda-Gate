@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/action
+    overwrite: yes
+
+permissions:
+  - object: /home/ubuntu/action
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    mode: 755 # 디렉토리와 파일 권한 설정
+
+hooks:
+  ApplicationStart:
+    - location: scripts/deploy.sh
+      timeout: 60
+      runas: ubuntu
