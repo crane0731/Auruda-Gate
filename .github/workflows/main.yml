@@ -7,7 +7,7 @@ on:
 
 env:
   S3_BUCKET_NAME: craneawsbucket
-  AWS_REGION: ap-northeast-2
+  AWS_REGION: eu-north-1
   CODEDEPLOY_NAME: github-actions
   CODEDEPLOY_GROUP: auruda
 
