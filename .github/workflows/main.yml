@@ -1,50 +1,40 @@
-# workflow의 이름
 name: github-action-auruda-gate
 
-# 해당 workflow가 언제 실행될 것인지에 대한 트리거를 지정
 on:
-  # main branch에 대한 push 나 pull request 이벤트를 트리거로 지정
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
-  # 수동으로 해당 workflow 실행 지정
   workflow_dispatch:
 
-# workflow는 한개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있습니다.
 env:
-  S3_BUCKET_NAME: S3 버킷 이름
+  S3_BUCKET_NAME: craneawsbucket
   AWS_REGION: ap-northeast-2
 
 jobs:
   build:
-    # 해당 workflow를 어떤 OS 환경에서 실행할 것인지 지정
     runs-on: ubuntu-latest
 
-    # step은 작업의 일부로 실행될 일련의 작업을 나타냅니다.
     steps:
       - name: Checkout
-        # 작업에서 액세스할 수 있도록 $GITHUB_WORKSPACE에서 저장소를 체크아웃합니다.
         uses: actions/checkout@v3
 
+      - name: Set up JDK 21 (Corretto)
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'corretto'
+
       - name: Grant execute permission for gradlew
-        # gradlew 파일에 실행 권한을 부여합니다.
         run: chmod +x ./gradlew
-        shell: bash
 
       - name: Build with Gradle
-        # Gradle을 사용하여 프로젝트를 빌드합니다.
         run: ./gradlew build
-        shell: bash
 
       - name: Make zip file
-        # 프로젝트를 압축하여 ZIP 파일로 생성합니다.
         run: zip -r ./$GITHUB_SHA.zip .
-        shell: bash
 
       - name: Configure AWS credentials
-        # AWS 자격 증명을 설정합니다.
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -52,5 +42,4 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Upload to S3
-        # S3에 ZIP 파일을 업로드합니다.
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
