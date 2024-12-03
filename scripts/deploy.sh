@@ -24,19 +24,21 @@ echo ">>> 찾은 ZIP 파일 이름: $ZIP_FILE_NAME" >> $LOCAL_PATH/deploy.log
 echo ">>> S3에서 zip 파일 다운로드 중..." >> $LOCAL_PATH/deploy.log
 aws s3 cp s3://$S3_BUCKET_NAME/$ZIP_FILE_NAME $LOCAL_PATH/$ZIP_FILE_NAME
 
+# zip 파일 추출 전 기존 파일 삭제
+echo ">>> 기존 파일 삭제 중..." >> $LOCAL_PATH/deploy.log
+if [ -d "$SERVER_PATH" ]; then
+  rm -rf "$SERVER_PATH/*"
+  echo ">>> 기존 파일 삭제 완료." >> $LOCAL_PATH/deploy.log
+else
+  echo ">>> 기존 디렉토리가 없습니다. 새로 생성합니다." >> $LOCAL_PATH/deploy.log
+  mkdir -p "$SERVER_PATH"
+fi
+
 # zip 파일 추출
 echo ">>> zip 파일 추출 중..." >> $LOCAL_PATH/deploy.log
 unzip -o $LOCAL_PATH/$ZIP_FILE_NAME -d $SERVER_PATH/
 
-# clean-up.sh 실행 (압축 해제 후 정리)
-if [ -f "$SERVER_PATH/scripts/clean-up.sh" ]; then
-  echo ">>> clean-up.sh 실행 중..." >> $LOCAL_PATH/deploy.log
-  bash $SERVER_PATH/scripts/clean-up.sh
-else
-  echo ">>> clean-up.sh 파일이 없습니다. 정리 작업을 생략합니다." >> $LOCAL_PATH/deploy.log
-fi
-
-# yml.template 파일이 없으면 생성
+# yml.template 파일 생성 확인 및 복사
 if [ ! -f "$TEMPLATE_FILE" ]; then
   echo ">>> yml.template 파일이 없습니다. 새로운 yml.template 파일을 생성 중..." >> $LOCAL_PATH/deploy.log
   cat <<EOL > $TEMPLATE_FILE
