@@ -7,14 +7,18 @@ files:
 file_exists_behavior: OVERWRITE
 
 permissions:
+  - object: /home/ubuntu/action/auruda-gate/scripts/deploy.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 755  # 실행 권한 추가 (rwxr-xr-x)
   - object: /home/ubuntu/action/auruda-gate
     pattern: "**"
     owner: ubuntu
     group: ubuntu
-    mode: 755  # 디렉토리와 파일 권한 설정
+    mode: 755  # 디렉토리와 기타 파일의 기본 권한 설정
 
 hooks:
   ApplicationStart:
-    - location: auruda-gate/scripts/deploy.sh  # 상대 경로로 수정
+    - location: auruda-gate/scripts/deploy.sh
       timeout: 100
       runas: ubuntu
