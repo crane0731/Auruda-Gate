@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/ubuntu/action/auruda-gate
+  - source: /   # 모든 파일을 소스 디렉토리에서 가져옴
+    destination: /home/ubuntu/action/auruda-gate  # auruda-gate 디렉토리로 복사
     overwrite: yes
 
 permissions:
@@ -10,15 +10,15 @@ permissions:
     pattern: "**"
     owner: ubuntu
     group: ubuntu
-    mode: 755 # 디렉토리와 파일 권한 설정
+    mode: 755  # 디렉토리와 파일 권한 설정
 
 hooks:
   BeforeInstall:
-    - location: scripts/clean-up.sh
+    - location: /home/ubuntu/action/auruda-gate/scripts/clean-up.sh
       timeout: 100
       runas: ubuntu
 
   ApplicationStart:
-    - location: scripts/deploy.sh
+    - location: /home/ubuntu/action/auruda-gate/scripts/deploy.sh
       timeout: 100
       runas: ubuntu
