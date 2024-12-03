@@ -4,6 +4,7 @@ files:
   - source: /   # 모든 파일을 소스 디렉토리에서 가져옴
     destination: /home/ubuntu/action/auruda-gate  # auruda-gate 디렉토리로 복사
     overwrite: yes
+file_exists_behavior: OVERWRITE
 
 permissions:
   - object: /home/ubuntu/action/auruda-gate
