@@ -1,19 +1,20 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/ubuntu/action/auruda-gate
+  - source: /  # 루트에서 배포 아티팩트의 모든 파일을 가져옵니다.
+    destination: /home/ubuntu/action/  # 해당 경로에 파일을 배치
     overwrite: yes
+
 file_exists_behavior: OVERWRITE
 
 permissions:
-  - object: /home/ubuntu/action/auruda-gate/scripts/deploy.sh
+  - object: /home/ubuntu/action/deployment-archive/scripts/deploy.sh  # deploy.sh에 실행 권한 부여
     owner: ubuntu
     group: ubuntu
-    mode: 755  # deploy.sh 파일에만 실행 권한 부여
+    mode: 755
 
 hooks:
   ApplicationStart:
-    - location: auruda-gate/scripts/deploy.sh
+    - location: deployment-archive/scripts/deploy.sh  # 경로가 맞춰짐
       timeout: 100
       runas: ubuntu
