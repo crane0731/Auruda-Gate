@@ -15,6 +15,6 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: deployment-archive/scripts/deploy.sh  # 경로가 맞춰짐
+    - location: /scripts/deploy.sh  # 경로가 맞춰짐
       timeout: 100
       runas: ubuntu
