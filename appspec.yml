@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/action
+    destination: /home/ubuntu/action/auruda-gate
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/action
+  - object: /home/ubuntu/action/auruda-gate
     pattern: "**"
     owner: ubuntu
     group: ubuntu
