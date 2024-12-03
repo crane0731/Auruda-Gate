@@ -14,11 +14,11 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: /home/ubuntu/action/auruda-gate/scripts/clean-up.sh
+    - location: auruda-gate/scripts/clean-up.sh  # 상대 경로로 수정
       timeout: 100
       runas: ubuntu
 
   ApplicationStart:
-    - location: /home/ubuntu/action/auruda-gate/scripts/deploy.sh
+    - location: auruda-gate/scripts/deploy.sh  # 상대 경로로 수정
       timeout: 100
       runas: ubuntu
