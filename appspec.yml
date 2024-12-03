@@ -11,10 +11,10 @@ permissions:
   - object: /home/ubuntu/action/deployment-archive/scripts/deploy.sh  # deploy.sh에 실행 권한 부여
     owner: ubuntu
     group: ubuntu
-    mode: 755
+    mode: 755  # 실행 권한 부여
 
 hooks:
   ApplicationStart:
-    - location: /scripts/deploy.sh  # 경로가 맞춰짐
+    - location: /home/ubuntu/action/deployment-archive/scripts/deploy.sh  # 올바른 경로 지정
       timeout: 100
       runas: ubuntu
