@@ -30,6 +30,7 @@ public class JwtAuthenticationFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        System.out.println("Asdasd");
         // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
         // 요청 헤더에서 Authorization 키의 값 조회
