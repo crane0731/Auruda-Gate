@@ -17,21 +17,21 @@ spring:
     gateway:
       routes:
         - id: AurudaLogin
-          uri: http://auruda-login:8081
+          uri: http://localhost:8081
           predicates:
             - Path=/aurudalogin/**
           filters:
             - StripPrefix=1  # "/aurudalogin"? ???? ???????? ??
 
         - id: AurudaTrip
-          uri: http://auruda-trip:8082
+          uri: http://localhost:8082
           predicates:
             - Path=/aurudatrip/**
           filters:
             - StripPrefix=1  # "/aurudatrip"? ???? ???????? ??
 
         - id: AurudaArticle
-          uri: http://auruda-article:8083
+          uri: http://localhost:8083
           predicates:
             - Path=/aurudaarticle/**
           filters:
