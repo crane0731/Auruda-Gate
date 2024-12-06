@@ -55,7 +55,7 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://192.168.56.1:3000", "http://localhost:8000", "http://192.168.56.1:8000")); // 허용할 도메인 설정
+        configuration.setAllowedOrigins(List.of("http://14.63.178.38:3000")); // 허용할 도메인 설정
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // 인증 정보 허용
