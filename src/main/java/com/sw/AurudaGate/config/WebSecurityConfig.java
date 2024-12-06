@@ -31,7 +31,8 @@ public class WebSecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화
-                .cors(cors -> cors.configurationSource(request -> new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues())) // CORS 활성화
+                //.cors(cors -> cors.configurationSource(request -> new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues())) // CORS 활성화
+                .cors(cors ->cors.disable())
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/aurudalogin/api/auruda/auth/signup", "/aurudalogin/api/auruda/auth/login", "/aurudalogin/api/auth/kakao", "/aurudalogin/api/auth/kakao/callback", "/aurudatrip/api/auruda/photo",
                                 "/aurudaarticle/api/auruda/article", "/aurudaarticle/api/auruda/comment/list/{article_id}",

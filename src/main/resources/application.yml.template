@@ -15,20 +15,6 @@ spring:
     name: AurudaGate
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]': # 모든 경로에 대해 CORS 설정
-            allowedOrigins:
-              - "http://14.63.178.38:3000" # 허용할 Origin (React 앱 도메인)
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-            allowedHeaders:
-              - "*" # 모든 요청 헤더 허용
-            allow-credentials: true # 인증 정보 허용
       routes:
         - id: AurudaLogin
           uri: http://auruda-login:8081 # Docker Compose 내부 네트워크 주소
