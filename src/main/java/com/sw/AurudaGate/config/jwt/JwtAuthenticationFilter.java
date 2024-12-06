@@ -38,7 +38,6 @@ public class JwtAuthenticationFilter implements WebFilter {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             // "Bearer " 접두사 제거
             String token = authorizationHeader.substring(7);
-            System.out.println("asdasd");
             // 토큰 확인
             System.out.println("JwtAuthenticationFilter: Token found - " + token);
 
