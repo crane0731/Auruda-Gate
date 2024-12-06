@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter implements WebFilter {
             String token = authorizationHeader.substring(7);
             // 토큰 확인
             System.out.println("JwtAuthenticationFilter: Token found - " + token);
+            System.out.println("Asd");
 
             // 토큰 유효성 확인
             if (tokenProvider.validateToken(token)) {
