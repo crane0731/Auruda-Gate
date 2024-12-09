@@ -1,26 +1,24 @@
 server:
-  port: 8000 # HTTP 기본 포트
-  ssl:
-    enabled: false # HTTPS 비활성화
+  port: 8000
+
 jwt:
   issuer: dlwnsgkr8318@skuniv.ac.kr
   secret: asfacolkasndlknv3203klfamkld02asdkjfajkvnlancdkdklmasdklv
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+
 spring:
   application:
     name: AurudaGate
   cloud:
     gateway:
-      http-server:
-        port: 80 # HTTP 요청을 받을 포트
       globalcors:
         corsConfigurations:
           '[/**]': # 모든 경로에 대해 CORS 설정
             allowedOrigins:
-              - "http://14.63.178.38:3000" # React 앱 주소 (개발 환경)
-              - "https://auruda.duckdns.org" # 배포 환경
+              - "http://14.63.178.38:3000" # 허용할 Origin (React 앱의 주소)
             allowedMethods:
               - GET
               - POST
@@ -32,19 +30,21 @@ spring:
             allow-credentials: true # 인증 정보 허용
       routes:
         - id: AurudaLogin
-          uri: http://auruda-login:8081 # Docker 컨테이너 이름 유지
+          uri: http://auruda-login:8081
           predicates:
             - Path=/aurudalogin/**
           filters:
             - StripPrefix=1  # "/aurudalogin" 경로 제거
+
         - id: AurudaTrip
-          uri: http://auruda-trip:8082 # Docker 컨테이너 이름 유지
+          uri: http://auruda-trip:8082
           predicates:
             - Path=/aurudatrip/**
           filters:
             - StripPrefix=1  # "/aurudatrip" 경로 제거
+
         - id: AurudaArticle
-          uri: http://auruda-article:8083 # Docker 컨테이너 이름 유지
+          uri: http://auruda-article:8083
           predicates:
             - Path=/aurudaarticle/**
           filters:
