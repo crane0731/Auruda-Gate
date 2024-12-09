@@ -16,6 +16,8 @@ spring:
     name: AurudaGate
   cloud:
     gateway:
+      default-filters:
+        - PreserveHostHeader=true  # 호스트 헤더 유지
       routes:
         - id: AurudaLogin
           uri: http://auruda-login:8081
