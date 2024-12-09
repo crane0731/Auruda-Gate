@@ -11,6 +11,7 @@ public class GatewayCorsConfig {
 
     @Bean
     public CorsWebFilter corsWebFilter() {
+        System.out.println("Asdasdasd");
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.addAllowedOrigin("http://14.63.178.38:3000"); // React 앱의 URL (개발 환경)
         corsConfig.addAllowedOrigin("https://auruda.duckdns.org"); // 배포 환경의 URL
