@@ -29,6 +29,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	// Spring Boot Starter Tomcat (Tomcat 명시적 설정)
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+
 	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0' // 버전은 필요한 Jakarta API 버전에 맞추어 설정
 	// 그 외 다른 종속성들
 
