@@ -1,9 +1,9 @@
 server:
-  port: 8000 # HTTPS 포트를 8000으로 설정
+  port: 443 # HTTPS 기본 포트
   address: 0.0.0.0
   ssl:
     enabled: true
-    key-store: /home/ubuntu/keystore.p12 # keystore.p12 파일의 클래스패스 경로
+    key-store: /home/ubuntu/keystore.p12 # keystore.p12 파일 경로
     key-store-password: "1234" # OpenSSL 변환 시 설정한 비밀번호
     key-store-type: PKCS12
 
@@ -21,12 +21,13 @@ spring:
   cloud:
     gateway:
       http-server:
-        port: 8080 # HTTP 요청을 받을 포트 (HTTP에서 HTTPS로 리다이렉트)
+        port: 80 # HTTP 요청을 받을 포트
       globalcors:
         corsConfigurations:
           '[/**]': # 모든 경로에 대해 CORS 설정
             allowedOrigins:
-              - "http://14.63.178.38:3000" # React 앱 주소
+              - "http://14.63.178.38:3000" # React 앱 주소 (개발 환경)
+              - "https://auruda.duckdns.org" # 배포 환경
             allowedMethods:
               - GET
               - POST
@@ -43,7 +44,6 @@ spring:
             - Path=/aurudalogin/**
           filters:
             - StripPrefix=1  # "/aurudalogin" 경로 제거
-            - RedirectToHttps=8000 # HTTP 요청을 HTTPS로 리다이렉트
 
         - id: AurudaTrip
           uri: http://auruda-trip:8082 # Docker 컨테이너 이름 유지
@@ -51,7 +51,6 @@ spring:
             - Path=/aurudatrip/**
           filters:
             - StripPrefix=1  # "/aurudatrip" 경로 제거
-            - RedirectToHttps=8000 # HTTP 요청을 HTTPS로 리다이렉트
 
         - id: AurudaArticle
           uri: http://auruda-article:8083 # Docker 컨테이너 이름 유지
@@ -59,4 +58,3 @@ spring:
             - Path=/aurudaarticle/**
           filters:
             - StripPrefix=1  # "/aurudaarticle" 경로 제거
-            - RedirectToHttps=8000 # HTTP 요청을 HTTPS로 리다이렉트
