@@ -1,11 +1,11 @@
 server:
   port: 443 # HTTPS 기본 포트
   address: 0.0.0.0
-  ssl:
-    enabled: true
-    key-store: /home/ubuntu/keystore.p12 # keystore.p12 파일 경로
-    key-store-password: "1234" # OpenSSL 변환 시 설정한 비밀번호
-    key-store-type: PKCS12
+  #ssl:
+   # enabled: true
+    #key-store: /home/ubuntu/keystore.p12 # keystore.p12 파일 경로
+    #key-store-password: "1234" # OpenSSL 변환 시 설정한 비밀번호
+    #key-store-type: PKCS12
 
 jwt:
   issuer: dlwnsgkr8318@skuniv.ac.kr
