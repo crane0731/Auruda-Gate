@@ -92,7 +92,6 @@ public class JwtAuthenticationFilter implements WebFilter {
     private final TokenProvider tokenProvider;
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
         // 요청의 쿠키에서 "refreshToken" 값 가져오기
         String refreshToken = exchange.getRequest()
@@ -101,7 +100,6 @@ public class JwtAuthenticationFilter implements WebFilter {
                 ? exchange.getRequest().getCookies().getFirst("refreshToken").getValue()
                 : null;
         if (refreshToken != null) {
-            // Refresh Token 로깅
             System.out.println("JwtAuthenticationFilter: Refresh Token found - " + refreshToken);
             // 토큰 유효성 확인
             if (tokenProvider.validateToken(refreshToken)) {
@@ -109,6 +107,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                 SecurityContext securityContext = new SecurityContextImpl(authentication);
                 // 토큰에서 사용자 ID 추출
                 Long userId = tokenProvider.getUserId(refreshToken);
+                // 요청 헤더 수정
                 ServerHttpRequestDecorator modifiedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
                     @Override
                     public HttpHeaders getHeaders() {
@@ -130,8 +129,9 @@ public class JwtAuthenticationFilter implements WebFilter {
                 // 모든 헤더 로깅
                 System.out.println("Headers in modified request:");
                 modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
-                        System.out.println("모든 헤더 로키이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ"+key + ": " + String.join(", ", values))
+                        System.out.println(key + ": " + String.join(", ", values))
                 );
+                // 필터 체인에 수정된 요청 전달
                 return chain.filter(modifiedExchange)
                         .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));
             } else {
@@ -140,6 +140,7 @@ public class JwtAuthenticationFilter implements WebFilter {
         } else {
             System.out.println("JwtAuthenticationFilter: No Refresh Token found in cookies");
         }
+        // 기본 요청 체인 처리
         return chain.filter(exchange);
     }
 }
