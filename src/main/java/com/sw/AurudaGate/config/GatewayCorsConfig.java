@@ -17,9 +17,7 @@ public class GatewayCorsConfig {
         corsConfig.addAllowedOrigin("https://auruda.duckdns.org"); // 배포 환경의 URL
         corsConfig.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
         corsConfig.addAllowedHeader("*"); // 모든 헤더 허용
-        //corsConfig.addAllowedHeader("Authorization");
-        //corsConfig.addAllowedHeader("Content-Type");
-        //corsConfig.addAllowedHeader("Accept");
+        corsConfig.addExposedHeader("Authorization");
         corsConfig.setAllowCredentials(true); // 인증정보 허용
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

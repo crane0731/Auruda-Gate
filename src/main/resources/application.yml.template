@@ -10,6 +10,7 @@ logging:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.web: DEBUG
+    org.springframework.http.server.reactive: DEBUG
 
 spring:
   application:
