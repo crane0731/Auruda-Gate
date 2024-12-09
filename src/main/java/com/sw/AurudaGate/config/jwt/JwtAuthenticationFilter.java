@@ -114,9 +114,13 @@ public class JwtAuthenticationFilter implements WebFilter {
                     public HttpHeaders getHeaders() {
                         HttpHeaders headers = new HttpHeaders();
                         headers.putAll(super.getHeaders());  // 기존 헤더 복사
-                        // Authorization 헤더가 없을 때만 추가
+                        // Authorization 헤더 추가
                         if (!headers.containsKey(HttpHeaders.AUTHORIZATION)) {
-                            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + refreshToken);  // Authorization 헤더 추가
+                            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + refreshToken);
+                        }
+                        // User-Id 헤더 추가
+                        if (!headers.containsKey("User-Id")) {
+                            headers.add("User-Id", String.valueOf(userId));
                         }
                         return headers;
                     }
