@@ -23,7 +23,6 @@ spring:
             - Path=/aurudalogin/**
           filters:
             - StripPrefix=1  # "/aurudalogin" 경로 제거
-            - JwtAuthenticationFilter
 
         - id: AurudaTrip
           uri: http://auruda-trip:8082
