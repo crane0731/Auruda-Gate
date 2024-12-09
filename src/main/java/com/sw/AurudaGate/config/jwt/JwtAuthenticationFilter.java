@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         System.out.println("JwtAuthenticationFilter 호출됨: " + exchange.getRequest().getPath());
-        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd무사히 통과ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ ");
+        System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 
         // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
