@@ -8,6 +8,8 @@ jwt:
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.web: DEBUG
 
 spring:
   application:
