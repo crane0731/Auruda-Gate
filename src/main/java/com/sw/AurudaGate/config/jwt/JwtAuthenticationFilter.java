@@ -30,6 +30,10 @@ public class JwtAuthenticationFilter implements WebFilter {
         System.out.println("JwtAuthenticationFilter 호출됨: " + exchange.getRequest().getPath());
         System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 
+        exchange.getRequest().getHeaders().forEach((key, values) -> {
+            System.out.println(key + ": " + String.join(", ", values));
+        });
+
         // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
         // 요청 헤더에서 Authorization 키의 값 조회
