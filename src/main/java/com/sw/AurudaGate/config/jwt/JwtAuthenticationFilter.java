@@ -130,7 +130,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                 // 모든 헤더 로깅
                 System.out.println("Headers in modified request:");
                 modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
-                        System.out.println(key + ": " + String.join(", ", values))
+                        System.out.println("모든 헤더 로키이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ"+key + ": " + String.join(", ", values))
                 );
                 return chain.filter(modifiedExchange)
                         .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));
