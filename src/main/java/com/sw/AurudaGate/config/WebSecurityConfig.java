@@ -40,7 +40,7 @@ public class WebSecurityConfig {
 
                         .pathMatchers("/api/auruda/users/admin/**").hasRole("ADMIN")
 
-                        .pathMatchers("/aurudalogin/api/auruda/auth/logout","/aurudaarticle/api/auruda/article/new", "/aurudaarticle/api/auruda/article/{article_id}",
+                        .pathMatchers("/api/auruda/auth/logout","/aurudaarticle/api/auruda/article/new", "/aurudaarticle/api/auruda/article/{article_id}",
                                 "/aurudaarticle/api/auruda/article/me", "/aurudaarticle/api/auruda/article/recommendation/{article_id}",
                                 "/aurudaarticle/api/auruda/comment", "/aurudaarticle/api/auruda/comment/{comment_id}",
                                 "/aurudaarticle/api/auruda/comment/me", "/aurudatrip/api/auruda/review", "/aurudatrip/api/auruda/review/{review_id}",
