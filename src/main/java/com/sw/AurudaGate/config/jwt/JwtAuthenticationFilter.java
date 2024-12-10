@@ -96,13 +96,14 @@ public class JwtAuthenticationFilter implements WebFilter {
                     public java.net.URI getURI() {
                         // 기존 URI를 그대로 반환
                         String originalUri = super.getURI().toString();
-                        String userIdQuery = "User-Id=" + userId;
+                        String userIdQuery = "UserId=" + userId;
 
                         // 기존 URI에 쿼리 파라미터가 이미 있으면 "&"로 추가, 없으면 "?"로 추가
                         String modifiedUri = originalUri.contains("?")
                                 ? originalUri + "&" + userIdQuery
                                 : originalUri + "?" + userIdQuery;
 
+                        System.out.println("수정됐다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" + modifiedUri);
                         // 수정된 URI 반환
                         return java.net.URI.create(modifiedUri);
                     }
@@ -113,6 +114,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                         return super.getHeaders();
                     }
               };
+
 
                 // 수정된 요청을 가진 새로운 ServerWebExchange 생성
                 ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
