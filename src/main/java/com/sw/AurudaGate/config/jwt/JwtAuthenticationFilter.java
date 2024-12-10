@@ -48,11 +48,14 @@ public class JwtAuthenticationFilter implements WebFilter {
         String authorizationHeader = exchange.getRequest().getQueryParams().getFirst(HttpHeaders.AUTHORIZATION);
         System.out.println("authorizationHeader = " + authorizationHeader);
 
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+        //if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+        if (authorizationHeader != null) {
 
-            System.out.println("으아아아아아아아앙 ㅏ헤더가 없어 시발");
+
             // "Bearer " 접두사 제거
-            String token = authorizationHeader.substring(7);
+//            String token = authorizationHeader.substring(7);
+            String token = authorizationHeader;
+
             // 토큰 확인
             System.out.println("JwtAuthenticationFilter: Token found - " + token);
 
@@ -84,7 +87,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                             headers.add("User-Id", String.valueOf(userId));  // 새 헤더 추가
                         }
                         if (!headers.containsKey("Authorization")) {
-                            headers.add("Authorization", authorizationHeader);
+                            headers.add("Authorization", "Bearer " +authorizationHeader);
                         }
                         return headers;
                     }
