@@ -29,7 +29,7 @@ public class WebSecurityConfig {
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/aurudalogin/api/auruda/auth/signup", "/aurudalogin/api/auruda/auth/login", "/aurudalogin/api/auth/kakao", "/aurudalogin/api/auth/kakao/callback", "/aurudatrip/api/auruda/photo",
                                 "/aurudaarticle/api/auruda/article", "/aurudaarticle/api/auruda/comment/list/{article_id}",
-                                "/aurudatrip/api/auruda/review/{place_id}", "/aurudatrip/api/auruda/place/**", "/aurudatrip/api/auruda/latest-festivals", "/aurudatrip/api/auruda/latest-concerts").permitAll() // 로그인 서버의 공개 엔드포인트
+                                "/aurudatrip/api/auruda/review/{place_id}", "/aurudatrip/api/auruda/place/**", "/aurudatrip/api/auruda/latest-festivals", "/aurudatrip/api/auruda/latest-concerts","/aurudatrip/api/auruda/travel/itinerary").permitAll() // 로그인 서버의 공개 엔드포인트
 
                         .pathMatchers("/api/auruda/users/admin/**").hasRole("ADMIN")
 
