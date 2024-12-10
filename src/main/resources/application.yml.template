@@ -26,6 +26,7 @@ spring:
             - Path=/aurudalogin/**
           filters:
             - StripPrefix=1  # "/aurudalogin" 경로 제거
+            - RemoveRequestParameter=Authorization
 
         - id: AurudaTrip
           uri: http://auruda-trip:8082
@@ -33,6 +34,7 @@ spring:
             - Path=/aurudatrip/**
           filters:
             - StripPrefix=1  # "/aurudatrip" 경로 제거
+            - RemoveRequestParameter=Authorization
 
         - id: AurudaArticle
           uri: http://auruda-article:8083
@@ -40,3 +42,4 @@ spring:
             - Path=/aurudaarticle/**
           filters:
             - StripPrefix=1  # "/aurudaarticle" 경로 제거
+            - RemoveRequestParameter=Authorization
