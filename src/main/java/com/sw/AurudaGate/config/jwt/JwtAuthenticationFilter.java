@@ -31,7 +31,7 @@ public class JwtAuthenticationFilter implements WebFilter {
         System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 
         exchange.getRequest().getHeaders().forEach((key, values) -> {
-            System.out.println("아요오오오오오오오ㅗㅇ");
+            System.out.println("헤더의 정보");
             System.out.println(key + ": " + String.join(", ", values));
         });
 
