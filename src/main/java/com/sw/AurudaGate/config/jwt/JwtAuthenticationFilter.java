@@ -36,10 +36,16 @@ public class JwtAuthenticationFilter implements WebFilter {
             System.out.println(key + ": " + String.join(", ", values));
         });
 
+        exchange.getRequest().getQueryParams().forEach((key, values) -> {
+            System.out.println("파라미터의 정보임");
+            System.out.println(key + ": " + String.join(", ", values));
+        });
+
         // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
         // 요청 헤더에서 Authorization 키의 값 조회
-        String authorizationHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        //String authorizationHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        String authorizationHeader = exchange.getRequest().getQueryParams().getFirst(HttpHeaders.AUTHORIZATION);
         System.out.println("authorizationHeader = " + authorizationHeader);
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
