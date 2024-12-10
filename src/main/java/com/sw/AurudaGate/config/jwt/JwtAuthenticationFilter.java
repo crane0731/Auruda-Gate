@@ -31,15 +31,15 @@ public class JwtAuthenticationFilter implements WebFilter {
         System.out.println("JwtAuthenticationFilter 호출됨: " + exchange.getRequest().getPath());
         System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 
-        exchange.getRequest().getHeaders().forEach((key, values) -> {
-            System.out.println("헤더의 정보임");
-            System.out.println(key + ": " + String.join(", ", values));
-        });
-
-        exchange.getRequest().getQueryParams().forEach((key, values) -> {
-            System.out.println("파라미터의 정보임");
-            System.out.println(key + ": " + String.join(", ", values));
-        });
+//        exchange.getRequest().getHeaders().forEach((key, values) -> {
+//            System.out.println("헤더의 정보임");
+//            System.out.println(key + ": " + String.join(", ", values));
+//        });
+//
+//        exchange.getRequest().getQueryParams().forEach((key, values) -> {
+//            System.out.println("파라미터의 정보임");
+//            System.out.println(key + ": " + String.join(", ", values));
+//        });
 
         // 필터 호출 확인
         System.out.println("JwtAuthenticationFilter: filter() called");
@@ -99,9 +99,8 @@ public class JwtAuthenticationFilter implements WebFilter {
                         String userIdQuery = "UserId=" + userId;
 
                         // 기존 URI에 쿼리 파라미터가 이미 있으면 "&"로 추가, 없으면 "?"로 추가
-                        String modifiedUri = originalUri.contains("?")
-                                ? originalUri + "&" + userIdQuery
-                                : originalUri + "?" + userIdQuery;
+                        String modifiedUri =originalUri + "&" + userIdQuery;
+
 
                         System.out.println("수정됐다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" + modifiedUri);
                         // 수정된 URI 반환
@@ -124,6 +123,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                 modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
                         System.out.println(key + ": " + String.join(", ", values))
                 );
+                System.out.println("아니 ㅈ버그뭐냐 진짜ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"+modifiedExchange.getRequest().getURI());
 
                 return chain.filter(modifiedExchange)
                         .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));
