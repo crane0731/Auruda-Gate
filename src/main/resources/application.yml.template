@@ -21,7 +21,7 @@ spring:
         - PreserveHostHeader=true  # 호스트 헤더 유지
       routes:
         - id: AurudaLogin
-          uri: http://auruda-login:8081
+          uri: http://localhost:8081
           predicates:
             - Path=/aurudalogin/**
           filters:
@@ -29,7 +29,7 @@ spring:
 
 
         - id: AurudaTrip
-          uri: http://auruda-trip:8082
+          uri: http://localhost:8082
           predicates:
             - Path=/aurudatrip/**
           filters:
@@ -37,7 +37,7 @@ spring:
 
 
         - id: AurudaArticle
-          uri: http://auruda-article:8083
+          uri: http://localhost:8083
           predicates:
             - Path=/aurudaarticle/**
           filters:

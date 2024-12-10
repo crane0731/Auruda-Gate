@@ -24,7 +24,6 @@ public class WebSecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화
-                //.cors(cors -> cors.configurationSource(request -> new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues())) // CORS 활성화
                 .cors(cors->cors.disable())
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/aurudalogin/api/auruda/auth/signup", "/aurudalogin/api/auruda/auth/login", "/aurudalogin/api/auth/kakao", "/aurudalogin/api/auth/kakao/callback", "/aurudatrip/api/auruda/photo",
@@ -33,7 +32,7 @@ public class WebSecurityConfig {
 
                         .pathMatchers("/api/auruda/users/admin/**").hasRole("ADMIN")
 
-                        .pathMatchers("/aurudalogin/api/auruda/auth/logout/{userId}","/aurudaarticle/api/auruda/article/new", "/aurudaarticle/api/auruda/article/{article_id}",
+                        .pathMatchers("/aurudalogin/api/auruda/auth/logout","/aurudaarticle/api/auruda/article/new", "/aurudaarticle/api/auruda/article/{article_id}",
                                 "/aurudaarticle/api/auruda/article/me", "/aurudaarticle/api/auruda/article/recommendation/{article_id}",
                                 "/aurudaarticle/api/auruda/comment", "/aurudaarticle/api/auruda/comment/{comment_id}",
                                 "/aurudaarticle/api/auruda/comment/me", "/aurudatrip/api/auruda/review", "/aurudatrip/api/auruda/review/{review_id}",
