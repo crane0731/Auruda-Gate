@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         System.out.println("JwtAuthenticationFilter 호출됨: " + exchange.getRequest().getPath());
-        System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+        //System.out.println("시작이다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 
 //        exchange.getRequest().getHeaders().forEach((key, values) -> {
 //            System.out.println("헤더의 정보임");
@@ -42,11 +42,11 @@ public class JwtAuthenticationFilter implements WebFilter {
 //        });
 
         // 필터 호출 확인
-        System.out.println("JwtAuthenticationFilter: filter() called");
+        //System.out.println("JwtAuthenticationFilter: filter() called");
         // 요청 헤더에서 Authorization 키의 값 조회
         //String authorizationHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         String authorizationHeader = exchange.getRequest().getQueryParams().getFirst(HttpHeaders.AUTHORIZATION);
-        System.out.println("authorizationHeader = " + authorizationHeader);
+        //System.out.println("authorizationHeader = " + authorizationHeader);
 
         //if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
         if (authorizationHeader != null) {
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter implements WebFilter {
             String token = authorizationHeader;
 
             // 토큰 확인
-            System.out.println("JwtAuthenticationFilter: Token found - " + token);
+            //System.out.println("JwtAuthenticationFilter: Token found - " + token);
 
             // 토큰 유효성 확인
             if (tokenProvider.validateToken(token)) {
@@ -66,7 +66,7 @@ public class JwtAuthenticationFilter implements WebFilter {
 
                 // 토큰에서 사용자 ID 추출
                 Long userId = tokenProvider.getUserId(token);
-                System.out.println("토큰아이디는,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"+userId);
+                //System.out.println("토큰아이디는,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"+userId);
 
                 ServerHttpRequestDecorator modifiedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
 
@@ -105,7 +105,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                         }
 
 
-                        System.out.println("수정됐다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" + modifiedUri);
+                        //System.out.println("수정됐다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" + modifiedUri);
                         // 수정된 URI 반환
                         return java.net.URI.create(modifiedUri);
                     }
@@ -120,14 +120,14 @@ public class JwtAuthenticationFilter implements WebFilter {
 
                 // 수정된 요청을 가진 새로운 ServerWebExchange 생성
                 ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
-                System.out.println("수정된 URI: " + modifiedRequest.getURI());
+                //System.out.println("수정된 URI: " + modifiedRequest.getURI());
                 // 모든 헤더 로깅
-                System.out.println("Headers in modified request:");
-                modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
-                        System.out.println(key + ": " + String.join(", ", values))
-                );
-                System.out.println("아니 ㅈ버그뭐냐 진짜ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"+modifiedExchange.getRequest().getURI());
-
+                //System.out.println("Headers in modified request:");
+                //modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
+                //        System.out.println(key + ": " + String.join(", ", values))
+                //);
+               // System.out.println("아니 ㅈ버그뭐냐 진짜ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"+modifiedExchange.getRequest().getURI());
+                System.out.println("하하하하하하하하"+modifiedExchange.getRequest().getURI());
                 return chain.filter(modifiedExchange)
                         .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));
             } else {
@@ -137,7 +137,6 @@ public class JwtAuthenticationFilter implements WebFilter {
             System.out.println("JwtAuthenticationFilter: No Authorization header or invalid format");
         }
         System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd무사히 통과ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ ");
-
         return chain.filter(exchange);
     }
 }
