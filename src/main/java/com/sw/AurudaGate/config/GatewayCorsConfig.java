@@ -22,8 +22,10 @@ public class GatewayCorsConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
 
         // 허용할 오리진 추가
-        corsConfig.addAllowedOrigin("http://14.63.178.38:3000"); // React 앱의 개발 환경
-        corsConfig.addAllowedOrigin("https://auruda.duckdns.org"); // 배포 환경
+        corsConfig.addAllowedOrigin("http://localhost:3000"); // 배포 환경
+
+        //corsConfig.addAllowedOrigin("http://14.63.178.38:3000"); // React 앱의 개발 환경
+        //corsConfig.addAllowedOrigin("https://auruda.duckdns.org"); // 배포 환경
 
         // 허용할 HTTP 메서드
         corsConfig.addAllowedMethod("GET");
