@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter implements WebFilter {
         String authorizationHeader = exchange.getRequest().getQueryParams().getFirst(HttpHeaders.AUTHORIZATION);
         System.out.println("authorizationHeader = " + authorizationHeader);
 
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer%")) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 
             System.out.println("으아아아아아아아앙 ㅏ헤더가 없어 시발");
             // "Bearer " 접두사 제거
