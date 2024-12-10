@@ -74,6 +74,9 @@ public class JwtAuthenticationFilter implements WebFilter {
                         if (!headers.containsKey("User-Id")) {
                             headers.add("User-Id", String.valueOf(userId));  // 새 헤더 추가
                         }
+                        if (!headers.containsKey("Authorization")) {
+                            headers.add("Authorization", authorizationHeader);
+                        }
                         return headers;
                     }
                 };
