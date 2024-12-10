@@ -66,6 +66,15 @@ public class JwtAuthenticationFilter implements WebFilter {
                 System.out.println("토큰아이디는,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"+userId);
 
                 ServerHttpRequestDecorator modifiedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
+
+                    @Override
+                    public java.net.URI getURI() {
+                        // 기존 URI에서 Authorization 쿼리 파라미터 제거
+                        String originalUri = super.getURI().toString();
+                        String modifiedUri = originalUri.replaceAll("[&?]Authorization=.*?($|&)", "");
+                        return java.net.URI.create(modifiedUri);
+                    }
+
                     @Override
                     public HttpHeaders getHeaders() {
                         HttpHeaders headers = new HttpHeaders();
@@ -83,7 +92,7 @@ public class JwtAuthenticationFilter implements WebFilter {
 
                 // 수정된 요청을 가진 새로운 ServerWebExchange 생성
                 ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
-
+                System.out.println("수정된 URI: " + modifiedRequest.getURI());
                 // 모든 헤더 로깅
                 System.out.println("Headers in modified request:");
                 modifiedExchange.getRequest().getHeaders().forEach((key, values) ->
