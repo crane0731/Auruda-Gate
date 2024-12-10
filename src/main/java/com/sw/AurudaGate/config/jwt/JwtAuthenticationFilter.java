@@ -97,9 +97,12 @@ public class JwtAuthenticationFilter implements WebFilter {
                         // 기존 URI를 그대로 반환
                         String originalUri = super.getURI().toString();
                         String userIdQuery = "UserId=" + userId;
+                        String modifiedUri=originalUri;
 
-                        // 기존 URI에 쿼리 파라미터가 이미 있으면 "&"로 추가, 없으면 "?"로 추가
-                        String modifiedUri =originalUri + "&" + userIdQuery;
+                        if (!originalUri.contains("UserId=" + userId)) {
+
+                            modifiedUri =originalUri+"&"+userIdQuery;
+                        }
 
 
                         System.out.println("수정됐다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" + modifiedUri);
