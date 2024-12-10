@@ -70,28 +70,49 @@ public class JwtAuthenticationFilter implements WebFilter {
 
                 ServerHttpRequestDecorator modifiedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
 
+//                    @Override
+//                    public java.net.URI getURI() {
+//                        // 기존 URI에서 Authorization 쿼리 파라미터 제거
+//                        String originalUri = super.getURI().toString();
+//                        String modifiedUri = originalUri.replaceAll("[&?]Authorization=.*?($|&)", "");
+//
+//                        return java.net.URI.create(modifiedUri);
+//                    }
+
+//                    @Override
+//                    public HttpHeaders getHeaders() {
+//                        HttpHeaders headers = new HttpHeaders();
+//                        headers.putAll(super.getHeaders());  // 기존 헤더 복사
+//                        // User-Id 헤더가 없을 때만 추가
+//                        if (!headers.containsKey("User-Id")) {
+//                            headers.add("User-Id", String.valueOf(userId));  // 새 헤더 추가
+//                        }
+//                        if (!headers.containsKey("Authorization")) {
+//                            headers.add("Authorization", "Bearer " +authorizationHeader);
+//                        }
+//                        return headers;
+//                    }
                     @Override
                     public java.net.URI getURI() {
-                        // 기존 URI에서 Authorization 쿼리 파라미터 제거
+                        // 기존 URI를 그대로 반환
                         String originalUri = super.getURI().toString();
-                        String modifiedUri = originalUri.replaceAll("[&?]Authorization=.*?($|&)", "");
+                        String userIdQuery = "User-Id=" + userId;
+
+                        // 기존 URI에 쿼리 파라미터가 이미 있으면 "&"로 추가, 없으면 "?"로 추가
+                        String modifiedUri = originalUri.contains("?")
+                                ? originalUri + "&" + userIdQuery
+                                : originalUri + "?" + userIdQuery;
+
+                        // 수정된 URI 반환
                         return java.net.URI.create(modifiedUri);
                     }
 
                     @Override
                     public HttpHeaders getHeaders() {
-                        HttpHeaders headers = new HttpHeaders();
-                        headers.putAll(super.getHeaders());  // 기존 헤더 복사
-                        // User-Id 헤더가 없을 때만 추가
-                        if (!headers.containsKey("User-Id")) {
-                            headers.add("User-Id", String.valueOf(userId));  // 새 헤더 추가
-                        }
-                        if (!headers.containsKey("Authorization")) {
-                            headers.add("Authorization", "Bearer " +authorizationHeader);
-                        }
-                        return headers;
+                        // 기존 헤더를 그대로 반환
+                        return super.getHeaders();
                     }
-                };
+              };
 
                 // 수정된 요청을 가진 새로운 ServerWebExchange 생성
                 ServerWebExchange modifiedExchange = exchange.mutate().request(modifiedRequest).build();
